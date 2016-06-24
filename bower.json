@@ -1,0 +1,23 @@
+{
+  "name": "angular-global-pubsub",
+  "description": "Angular module to facilitate pubsub pattern between manually bootstrapped ng apps",
+  "main": "dist/angular-global-pubsub.min.js",
+  "authors": [
+    "business-devs@transferwise.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "pubsub",
+    "global",
+    "window"
+  ],
+  "homepage": "https://github.com/transferwise/angular-global-pubsub",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
