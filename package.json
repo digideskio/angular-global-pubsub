@@ -5,8 +5,8 @@
   "main": "dist/angular-global-pubsub.min.js",
   "scripts": {
     "test": "test",
-    "lint": "jshint src/index.js",
-    "build": "uglifyjs src/index.js --compress --mangle > dist/angular-global-pubsub.min.js"
+    "lint": "jshint ./src/index.js",
+    "build": "cp ./src/index.js ./dist/angular-global-pubsub.js && uglifyjs ./src/index.js --compress --mangle > ./dist/angular-global-pubsub.min.js"
   },
   "repository": {
     "type": "git",

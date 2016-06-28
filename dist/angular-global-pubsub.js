@@ -1,1 +1,79 @@
-!function(r){function e(r,e){function u(){return r.__globalPubSubRegistry||(r.__globalPubSubRegistry={}),r.__globalPubSubRegistry}function t(r){return u()[r]||(u()[r]={}),u()[r]}function n(r,u,n){return t(r)[u]&&e.warn("Callback is already associated to event",u,r),t(r)[u]=n,t(r)[u]}function c(r,u){t(r)[u]||e.warn("No callback is not associated to this event",u,r);var n=t(r);if(n){var c=n[u];return delete n[u],c}}return r.__globalPubSub=r.__globalPubSub||{publish:function(r,u){try{var n=t(r);n&&Object.keys(n).forEach(function(r){var t=n[r];if(t)try{t(u)}catch(c){e.log(c)}})}catch(c){e.error("An error has occured in the pubsub service.",c)}},subscribe:function(r,u,t){try{return n(r,u,t)}catch(c){e.error("An error has occured in the pubsub service",c)}},unsubscribe:function(r,u){try{return c(r,u)}catch(t){e.error("An error has occured in the pubsub service",t)}}},r.__globalPubSub}r.module("tw.utilities",[]).service("PubSubService",["$window","$log",e])}(window.angular);
+(function(angular) {
+  function PubsubService($window, $log) {
+    function getRegistry() {
+      if (!$window.__globalPubSubRegistry) {
+        $window.__globalPubSubRegistry = {};
+      }
+      return $window.__globalPubSubRegistry;
+    }
+
+    function getEventRegistry(event) {
+      if (!getRegistry()[event]) {
+        getRegistry()[event] = {};
+      }
+      return getRegistry()[event];
+    }
+
+    function appendCallbackToEventRegistry(event, id, callback) {
+      if (getEventRegistry(event)[id]) {
+        $log.warn('Callback is already associated to event', id, event);
+      }
+      getEventRegistry(event)[id] = callback;
+      return getEventRegistry(event)[id];
+    }
+
+    function removeCallbackFromEventRegistry(event, id) {
+      if (!(getEventRegistry(event)[id])) {
+        $log.warn('No callback is not associated to this event', id, event);
+      }
+
+      var eventHandler = getEventRegistry(event);
+      if (eventHandler) {
+        var callback = eventHandler[id];
+        delete eventHandler[id];
+        return callback;
+      }
+    }
+
+    $window.__globalPubSub = $window.__globalPubSub || {
+      publish: function(event, data) {
+        try {
+          var eventRegistry = getEventRegistry(event);
+          if (eventRegistry) {
+            Object.keys(eventRegistry)
+              .forEach(function(key) {
+                var callback = eventRegistry[key];
+                if (callback) {
+                  try {
+                    callback(data);
+                  } catch (e) {
+                    $log.log(e);
+                  }
+                }
+              });
+          }
+        } catch (e) {
+          $log.error('An error has occured in the pubsub service.', e);
+        }
+      },
+      subscribe: function(event, id, callback) {
+        try {
+          return appendCallbackToEventRegistry(event, id, callback);
+        } catch (e) {
+          $log.error('An error has occured in the pubsub service', e);
+        }
+      },
+      unsubscribe: function(event, id) {
+        try {
+          return removeCallbackFromEventRegistry(event, id);
+        } catch (e) {
+          $log.error('An error has occured in the pubsub service', e);
+        }
+      }
+    };
+    return $window.__globalPubSub;
+  }
+
+  angular.module('tw.utilities', [])
+    .service('PubSubService', ['$window', '$log', PubsubService]);
+})(window.angular);

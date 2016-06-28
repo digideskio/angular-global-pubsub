@@ -13,12 +13,15 @@ This service allows communication via the window object.
 ```bash
 $ npm install uglify-js -g
 ```
+
 2. Run linter
-```
+
+```bash
+$ npm run-script lint
 ```
 
 3. Run build
 
-```
-$ npm build
+```bash
+$ npm run-script build
 ```
