@@ -1,7 +1,7 @@
 {
   "name": "angular-global-pubsub",
   "description": "Angular module to facilitate pubsub pattern between manually bootstrapped ng apps",
-  "main": "dist/angular-global-pubsub.min.js",
+  "main": "dist/angular-global-pubsub.js",
   "authors": [
     "business-devs@transferwise.com"
   ],

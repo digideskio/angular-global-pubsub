@@ -2,7 +2,7 @@
   "name": "angular-global-pubsub",
   "version": "0.0.1",
   "description": "Angular module to facilitate pubsub pattern between manually bootstrapped ng apps",
-  "main": "dist/angular-global-pubsub.min.js",
+  "main": "dist/angular-global-pubsub.js",
   "scripts": {
     "test": "test",
     "lint": "jshint ./src/index.js",
