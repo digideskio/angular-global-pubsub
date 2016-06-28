@@ -1,6 +1,6 @@
 {
   "name": "angular-global-pubsub",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular module to facilitate pubsub pattern between manually bootstrapped ng apps",
   "main": "dist/angular-global-pubsub.js",
   "scripts": {
@@ -24,9 +24,8 @@
     "url": "https://github.com/transferwise/angular-global-pubsub/issues"
   },
   "homepage": "https://github.com/transferwise/angular-global-pubsub#readme",
+  "devDependencies": {},
   "dependencies": {
-    "jshint": "^2.9.2",
-    "uglify-js": "^2.6.4"
-  },
-  "devDependencies": {}
+    "angular": "^1.4.9"
+  }
 }
